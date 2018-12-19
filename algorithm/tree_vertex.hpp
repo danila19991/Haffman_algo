@@ -26,10 +26,10 @@ class vertex{
 public:
     /**
      * \brief               Constructor of vertex.
-     * \param[in] link      Array of initial links.
      * \param[in] symbol    Associated symbol.
+     * \param[in] link      Array of initial links.
      */
-    explicit vertex(const std::array<int, 2>& link = {0,0}, int symbol = -1);
+    explicit vertex(int symbol = -1, const std::array<int, 2>& link = {0, 0});
 
     /**
      * \brief   Getter for symbol.

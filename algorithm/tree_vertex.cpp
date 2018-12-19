@@ -4,7 +4,7 @@
 
 #include "tree_vertex.hpp"
 
-vertex::vertex(const std::array<int, 2>& link, int symbol):
+vertex::vertex(int symbol, const std::array<int, 2>& link):
     _link(link),
     _symbol(symbol)
 {

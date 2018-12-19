@@ -5,6 +5,29 @@
 #ifndef HAFFMAN_HUFFMAN_HPP
 #define HAFFMAN_HUFFMAN_HPP
 
+#include <array>
 
+#include "tree_vertex.hpp"
+
+template <int n>
+class huffman_tree{
+    std::array<std::pair<size_t, vertex>, 2*n -1> _vertexes;
+
+    void clean();
+
+    void generate_impl(const std::array<size_t, n>& weights);
+
+public:
+
+    huffman_tree() = default;
+
+    explicit huffman_tree(const std::array<size_t, n>& weights);
+
+    void generate(const std::array<size_t, n>& weights);
+
+    vertex get_root();
+
+    vertex get_vertex(int id);
+};
 
 #endif //HAFFMAN_HUFFMAN_HPP
