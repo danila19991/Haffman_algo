@@ -28,6 +28,10 @@ public:
     vertex get_root();
 
     vertex get_vertex(int id);
+
+    void print();
 };
+
+#include "huffman.inl"
 
 #endif //HAFFMAN_HUFFMAN_HPP
