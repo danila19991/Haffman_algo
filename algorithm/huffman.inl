@@ -42,8 +42,7 @@ template<int n>
 void huffman_tree<n>::generate_impl(const std::array<size_t, n>& weights)
 {
     for(size_t i=0;i<n; ++i){
-        _vertexes.at(i).first = weights.at(i);
-        _vertexes.at(i).second._symbol = i;
+        _vertexes.at(i) = std::make_pair(weights.at(i), vertex(i));
     }
     std::sort(std::begin(_vertexes), std::end(_vertexes));
     size_t t1=0, t2= static_cast<size_t>(n), t3= static_cast<size_t>(n);
