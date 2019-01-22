@@ -11,4 +11,6 @@ add_executable(${PROJECT_NAME}
     algorithm/huffman.inl
     algorithm/huffman.hpp
     algorithm/tree_vertex.hpp
-    algorithm/tree_vertex.cpp)
+    algorithm/tree_vertex.cpp
+    introsort/introsort_count.hpp
+    introsort/introsort_count.inl)

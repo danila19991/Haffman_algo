@@ -15,7 +15,7 @@ class huffman_tree{
 
     void clean();
 
-    void generate_impl(const std::array<size_t, n>& weights);
+    size_t generate_impl(const std::array<size_t, n>& weights);
 
 public:
 
@@ -23,7 +23,7 @@ public:
 
     explicit huffman_tree(const std::array<size_t, n>& weights);
 
-    void generate(const std::array<size_t, n>& weights);
+    size_t generate(const std::array<size_t, n>& weights);
 
     vertex get_root();
 

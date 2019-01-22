@@ -6,6 +6,8 @@
 #include <limits>
 #include <iostream>
 
+#include "../introsort/introsort_count.hpp"
+
 template<int n>
 huffman_tree<n>::huffman_tree(const std::array<size_t, n>& weights):
     _vertexes{std::make_pair(std::numeric_limits<size_t>::max(),vertex())}
@@ -14,10 +16,10 @@ huffman_tree<n>::huffman_tree(const std::array<size_t, n>& weights):
 }
 
 template<int n>
-void huffman_tree<n>::generate(const std::array<size_t, n>& weights)
+size_t huffman_tree<n>::generate(const std::array<size_t, n>& weights)
 {
     clean();
-    generate_impl(weights);
+    return generate_impl(weights);
 }
 
 template<int n>
@@ -39,19 +41,22 @@ void huffman_tree<n>::clean()
 }
 
 template<int n>
-void huffman_tree<n>::generate_impl(const std::array<size_t, n>& weights)
+size_t huffman_tree<n>::generate_impl(const std::array<size_t, n>& weights)
 {
     for(size_t i=0;i<n; ++i){
         _vertexes.at(i) = std::make_pair(weights.at(i), vertex(i));
     }
-    std::sort(std::begin(_vertexes), std::end(_vertexes));
+    size_t iterations = introsort(_vertexes, n) + n*3;
     size_t t1=0, t2= static_cast<size_t>(n), t3= static_cast<size_t>(n);
 
     for(int i=1;i<n;++i){
         std::array<int, 2> min_index = {-1, -1};
         size_t w_sum = 0;
 
+        iterations += 2;
+
         for(size_t j=0;j<2;++j){
+            iterations += 6;
             if(_vertexes.at(t1).first < _vertexes.at(t2).first && t1 < n){
                 min_index.at(j) = t1;
                 w_sum += _vertexes.at(t1).first;
@@ -66,7 +71,9 @@ void huffman_tree<n>::generate_impl(const std::array<size_t, n>& weights)
 
         _vertexes.at(t3) = std::make_pair(w_sum, vertex(min_index));
         ++t3;
+        iterations += 2;
     }
+    return iterations+1;
 }
 
 template<int n>

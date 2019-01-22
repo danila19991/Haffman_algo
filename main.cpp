@@ -8,29 +8,30 @@
 
 #include "generator/gener.hpp"
 #include "algorithm/huffman.hpp"
+#include "introsort/introsort_count.hpp"
 
 #include <chrono>
+#include <iomanip>
+#include <fstream>
 
-constexpr int iterations = 100;
-constexpr int n = 100000;
-constexpr int m = 5000000;
+constexpr int iterations = 430'000;
+constexpr int n = 2'500;
+constexpr int m = 50'000;
 
-huffman_tree<n> tree;
 
 int main(){
+    huffman_tree<n> tree;
     alphabet_weight_generator<n> generator;
-    std::cout.precision(9);
-    std::cout<<std::fixed;
+
+    std::ofstream out("data25.txt");
 
     double sum = 0;
 
     for(int i=0;i<iterations;++i){
         const auto input = generator.generate_weights(m);
-        auto start = std::chrono::high_resolution_clock::now();
-        tree.generate(input);
-        auto end = std::chrono::high_resolution_clock::now();
-        double k = static_cast<double>(std::chrono::duration_cast<std::chrono::nanoseconds>(end-start).count())*(1.e-9);
-        sum+=k;
+        auto time = tree.generate(input);
+        out<<time<<'\n';
+        sum+=static_cast<double>(time);
     }
     std::cout << "middle:\n" << sum/iterations << '\n';
 }
