@@ -14,7 +14,7 @@
 #include <iomanip>
 #include <fstream>
 
-constexpr int iterations = 430'000;
+constexpr int iterations = 100'000;
 constexpr int n = 2'500;
 constexpr int m = 50'000;
 
@@ -23,7 +23,7 @@ int main(){
     huffman_tree<n> tree;
     alphabet_weight_generator<n> generator;
 
-    std::ofstream out("data25.txt");
+    std::ofstream out("tmp225.txt", std::ofstream::app);
 
     double sum = 0;
 
